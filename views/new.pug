@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Here goes the New Message form.
+  form(method='POST' action='/new' class='form container')
+    label(for='message') Message: 
+    input(type='text' name='message' id='message' required)
+    label(for='username') Username: 
+    input(type='text' name='username' id='username' required)
+    button(type='submit') Submit
+    
