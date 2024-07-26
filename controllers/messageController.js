@@ -18,6 +18,7 @@ function format(date) {
 }
 
 const getMessages = asyncHandler(async (req, res) => {
+  console.log(messages)
   return res.render('index', { title: 'Message Board', messages: messages })
 })
 
