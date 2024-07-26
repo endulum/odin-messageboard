@@ -16,8 +16,9 @@ const logger = require('morgan')
 app.use(logger('dev'))
 
 // wire in routers
-const indexRouter = require('./routes/index')
-app.use('/', indexRouter)
+const messageRouter = require('./routes/messageRouter')
+app.use('/messages', messageRouter)
+app.use('/', (req, res) => res.redirect('/messages'))
 
 // catch 404 and forward to error handler
 const createError = require('http-errors')

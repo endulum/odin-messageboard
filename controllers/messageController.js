@@ -31,7 +31,7 @@ const postNewMessage = asyncHandler(async (req, res) => {
     user: req.body.username,
     added: format(new Date())
   });
-  return res.redirect('/')
+  return res.redirect('/messages')
 })
 
 module.exports = { getMessages, getNewMessageForm, postNewMessage }
