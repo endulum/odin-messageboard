@@ -18,6 +18,7 @@ function format(date) {
 }
 
 const getMessages = asyncHandler(async (req, res) => {
+  console.log(messages)
   return res.render('index', { title: 'Message Board', messages: messages })
 })
 
@@ -31,7 +32,7 @@ const postNewMessage = asyncHandler(async (req, res) => {
     user: req.body.username,
     added: format(new Date())
   });
-  return res.redirect('/')
+  return res.redirect('/messages')
 })
 
 module.exports = { getMessages, getNewMessageForm, postNewMessage }
