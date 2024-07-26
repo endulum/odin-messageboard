@@ -2,12 +2,14 @@
 
 <h1>New Message</h1>
 
-<form method="POST" action="/messages/new" class="form-container">
+<form method="POST" action="/messages/new" class="form container">
   <label for="message">Message: </label>
   <input type="text" id="message" name="message" required>
   <label for="username">Username: </label>
   <input type="text" id="username" name="username" required>
   <button type="submit">Post</button>
 </form>
+
+<a href="/messages">Go Back</a>
 
 <%- include('../bottom') -%>

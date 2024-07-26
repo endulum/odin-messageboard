@@ -6,6 +6,7 @@ const app = express()
 const path = require('path')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, "public")))
 
 // enable use of req.body
 app.use(express.urlencoded({ extended: true }))
@@ -18,7 +19,6 @@ app.use(logger('dev'))
 // wire in routers
 const messageRouter = require('./routes/messageRouter')
 app.use('/messages', messageRouter)
-app.use('/', (req, res) => res.redirect('/messages'))
 
 // catch 404 and forward to error handler
 const createError = require('http-errors')

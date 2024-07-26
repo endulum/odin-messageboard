@@ -2,7 +2,7 @@
 
 <h1>Hello World</h1>
 
-<ul>
+<ul class="container messages">
   <% for (let message of messages) { %>
     <li>
       <b><%= message.user %></b>: <%= message.text %>
@@ -10,7 +10,7 @@
       <small><%= message.added %></small>
     </li>
   <% } %>
-</ul>
+</ul> 
 
 <a href="/messages/new">New Message</a>
 
