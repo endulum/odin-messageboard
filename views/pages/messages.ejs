@@ -1,0 +1,17 @@
+<%- include('../top') -%>
+
+<h1>Hello World</h1>
+
+<ul>
+  <% for (let message of messages) { %>
+    <li>
+      <b><%= message.user %></b>: <%= message.text %>
+      <br>
+      <small><%= message.added %></small>
+    </li>
+  <% } %>
+</ul>
+
+<a href="/messages/new">New Message</a>
+
+<%- include('../bottom') -%>

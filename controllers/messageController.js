@@ -18,11 +18,14 @@ function format(date) {
 }
 
 const getMessages = asyncHandler(async (req, res) => {
-  return res.render('index', { title: 'Message Board', messages: messages })
+  return res.render('pages/messages', { 
+    title: 'Message Board', 
+    messages: messages 
+  })
 })
 
 const getNewMessageForm = asyncHandler(async (req, res) => {
-  return res.render('new', { title: 'New Message' })
+  return res.render('pages/newMessage', { title: 'New Message' })
 })
 
 const postNewMessage = asyncHandler(async (req, res) => {
