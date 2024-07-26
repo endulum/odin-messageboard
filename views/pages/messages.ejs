@@ -1,13 +1,15 @@
 <%- include('../top') -%>
 
-<h1>Hello World</h1>
+<h1>Message Board</h1>
 
 <ul class="container messages">
-  <% for (let message of messages) { %>
+  <% for (let message in messages) { %>
     <li>
-      <b><%= message.user %></b>: <%= message.text %>
+      <b><%= messages[message].user %></b>: <%= messages[message].text %>
       <br>
-      <small><%= message.added %></small>
+      <small>
+        <%= messages[message].added %> | <a href="messages/<%= message %>">View</a>
+      </small>
     </li>
   <% } %>
 </ul> 

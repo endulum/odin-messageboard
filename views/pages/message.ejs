@@ -1,0 +1,13 @@
+<%- include('../top') -%>
+
+<h1>Viewing Message</h1>
+
+<p>
+  <b>Username:</b> <%= locals.message.user %> <br>
+  <b>Text: </b> <%= locals.message.text %> <br>
+  <b>Date sent: </b> <%= locals.message.added %> <br>
+</p>
+
+<a href="/messages">Go Back</a>
+
+<%- include('../bottom') -%>

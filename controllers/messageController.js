@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const createError = require('http-errors')
 const { DateTime } = require('luxon')
 
 const messages = [
@@ -24,12 +25,19 @@ const getMessages = asyncHandler(async (req, res) => {
   })
 })
 
+const getMessage = asyncHandler(async (req, res, next) => {
+  const message = messages[req.params.index]
+  if (!message) return next(createError(404, 'Message not found.'))
+  res.locals.message = message
+  return res.render('pages/message', { title: 'Viewing Message' })
+})
+
 const getNewMessageForm = asyncHandler(async (req, res) => {
   return res.render('pages/newMessage', { title: 'New Message' })
 })
 
 const postNewMessage = asyncHandler(async (req, res) => {
-  messages.push({
+  messages.unshift({
     text: req.body.message,
     user: req.body.username,
     added: format(new Date())
@@ -37,4 +45,4 @@ const postNewMessage = asyncHandler(async (req, res) => {
   return res.redirect('/messages')
 })
 
-module.exports = { getMessages, getNewMessageForm, postNewMessage }
+module.exports = { getMessages, getMessage, getNewMessageForm, postNewMessage }
