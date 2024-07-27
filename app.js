@@ -16,6 +16,12 @@ app.use(express.json())
 const logger = require('morgan')
 app.use(logger('dev'))
 
+// make / redirect to /messages
+app.get('/', async (req, res) => {
+  console.log('hit')
+  return res.redirect('/messages')
+})
+
 // wire in routers
 const messageRouter = require('./routes/messageRouter')
 app.use('/messages', messageRouter)
