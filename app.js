@@ -1,3 +1,6 @@
+// init dotenv
+require('dotenv').config()
+
 // create app
 const express = require('express')
 const app = express()
@@ -44,4 +47,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(3000, () => console.log('Connected at port 3000'))
+const port = process.env.PORT || 3000
+
+app.listen(port, () => console.log(`Connected at port ${port}`))
