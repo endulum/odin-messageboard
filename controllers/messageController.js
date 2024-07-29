@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const { DateTime } = require('luxon')
+const { logAll } = require('../db/queries')
 
 const messages = [
   {
@@ -45,4 +46,11 @@ const postNewMessage = asyncHandler(async (req, res) => {
   return res.redirect('/messages')
 })
 
-module.exports = { getMessages, getMessage, getNewMessageForm, postNewMessage }
+const getDBLogTest = asyncHandler(async (req, res) => { // remove
+  logAll()
+  return res.send('see log')
+})
+
+module.exports = { 
+  getMessages, getMessage, getNewMessageForm, postNewMessage, getDBLogTest
+}
