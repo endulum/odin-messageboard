@@ -4,7 +4,7 @@ const { DateTime } = require('luxon')
 const db = require('../db/queries')
 
 function format(date) {
-  return DateTime.fromJSDate(date).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);
+  return DateTime.fromMillis(parseInt(date)).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);
 }
 
 const getMessages = asyncHandler(async (req, res) => {

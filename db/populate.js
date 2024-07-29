@@ -7,12 +7,12 @@ CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   username VARCHAR(255) NOT NULL,
   message VARCHAR(255) NOT NULL,
-  date TIMESTAMP NOT NULL
+  date VARCHAR(255) NOT NULL
 );
 
 INSERT INTO messages (username, message, date) VALUES
-  ('Amando', 'Hi there!', TO_TIMESTAMP(${Date.now()})),
-  ('Charles', 'Hello world!', TO_TIMESTAMP(${Date.now()}))
+  ('Amando', 'Hi there!', '${Date.now()}'),
+  ('Charles', 'Hello world!', '${Date.now()}')
 ;
 `
 
