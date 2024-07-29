@@ -5,10 +5,10 @@
 <ul class="container messages">
   <% for (let message in messages) { %>
     <li>
-      <b><%= messages[message].user %></b>: <%= messages[message].text %>
+      <b><%= messages[message].username %></b>: <%= messages[message].message %>
       <br>
       <small>
-        <%= messages[message].added %> | <a href="messages/<%= message %>">View</a>
+        <%= messages[message].date %> | <a href="messages/<%= message %>">View</a>
       </small>
     </li>
   <% } %>

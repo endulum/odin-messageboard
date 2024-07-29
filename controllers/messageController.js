@@ -1,36 +1,27 @@
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const { DateTime } = require('luxon')
-const { logAll } = require('../db/queries')
-
-const messages = [
-  {
-    text: 'Hi there!',
-    user: 'Amando',
-    added: format(new Date()),
-  }, {
-    text: 'Hello, world!',
-    user: 'Charles',
-    added: format(new Date())
-  }
-]
+const db = require('../db/queries')
 
 function format(date) {
   return DateTime.fromJSDate(date).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);
 }
 
 const getMessages = asyncHandler(async (req, res) => {
+  const messages = await db.getAllMessages()
   return res.render('pages/messages', { 
     title: 'Message Board', 
-    messages: messages 
+    messages: messages.map(message => ({ ...message, date: format(message.date) }))
   })
 })
 
 const getMessage = asyncHandler(async (req, res, next) => {
-  const message = messages[req.params.index]
+  const message = (await db.getMessageById(req.params.id))[0]
   if (!message) return next(createError(404, 'Message not found.'))
-  res.locals.message = message
-  return res.render('pages/message', { title: 'Viewing Message' })
+  return res.render('pages/message', { 
+    title: 'Viewing Message',
+    message: { ... message, date: format(message.date) }
+  })
 })
 
 const getNewMessageForm = asyncHandler(async (req, res) => {
@@ -38,19 +29,10 @@ const getNewMessageForm = asyncHandler(async (req, res) => {
 })
 
 const postNewMessage = asyncHandler(async (req, res) => {
-  messages.unshift({
-    text: req.body.message,
-    user: req.body.username,
-    added: format(new Date())
-  });
+  await db.insertMessage(req.body.username, req.body.message)
   return res.redirect('/messages')
 })
 
-const getDBLogTest = asyncHandler(async (req, res) => { // remove
-  logAll()
-  return res.send('see log')
-})
-
 module.exports = { 
-  getMessages, getMessage, getNewMessageForm, postNewMessage, getDBLogTest
+  getMessages, getMessage, getNewMessageForm, postNewMessage
 }

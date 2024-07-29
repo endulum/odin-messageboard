@@ -1,8 +1,22 @@
 const pool = require('./pool')
 
-async function logAll() {
+async function getAllMessages() {
   const { rows } = await pool.query('SELECT * FROM messages')
-  console.log(rows)
+  return rows
 }
 
-module.exports = { logAll }
+async function getMessageById(id) {
+  const { rows } = await pool.query('SELECT * FROM messages WHERE id = $1', [id])
+  return rows
+}
+
+async function insertMessage(username, message) {
+  await pool.query(`
+  INSERT INTO messages (username, message, date) VALUES
+    ('${username}', '${message}', TO_TIMESTAMP(${Date.now()}));
+  `)
+}
+
+module.exports = { 
+  getAllMessages, getMessageById, insertMessage
+}
